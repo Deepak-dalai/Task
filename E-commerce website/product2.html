@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product 1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .product-images img {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-light p-3">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="home.html"><strong> E-commerce </strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+                              </svg></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-images">
+                    <img src="images/Oneplus nord CE.jpg" alt="Product Image">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1>One Plus</h1>
+                <p>one plus Nord CE</p>
+                <p>Price: $300.00</p>
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" class="form-control" value="1" min="1">
+                </div>
+                <button class="btn btn-primary" onclick="addToCart('Product 1', 10.00)">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+    <footer class="text-center bg-light p-3">
+        <p>&copy; 2024 E-commerce</p>
+    </footer>
+    <script>
+        function addToCart(productName, productPrice) {
+            var quantity = document.getElementById('quantity').value;
+            if (quantity <= 0 || isNaN(quantity)) {
+                alert('Please enter a valid quantity.');
+                return;
+            }
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var product = cart.find(item => item.name === productName);
+            if (product) {
+                product.quantity += parseInt(quantity);
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: parseInt(quantity) });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Product added to cart!');
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
